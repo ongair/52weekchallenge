@@ -1,0 +1,11 @@
+{
+  "name": "52weekchallenge",
+  "version": "1.0.0",
+  "description": "A bot for the 52 week challenge saving bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "author": "Ongair",
+  "license": "UNLICENSED"
+}
