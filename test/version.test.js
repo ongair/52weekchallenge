@@ -14,6 +14,7 @@ describe('Our API version', () => {
     chai.request(server)
       .get('/api/version')
       .end((err, res) => {
+        // console.log('Res', res, err)
         res.should.have.status(200)
         res.body.version.should.equal('1.1')
         done()
