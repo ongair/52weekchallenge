@@ -4,7 +4,8 @@
   "description": "A bot for the 52 week challenge saving bot",
   "main": "app/index.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "start": "node app/index.js"
   },
   "author": "Ongair",
   "license": "UNLICENSED",
