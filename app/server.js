@@ -2,12 +2,13 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const botkit = require('ongair-botkit')
-const { version } = botkit
+const { version, User, Request } = botkit
 
 class Server {
 
   constructor(ver, wizard) {
     this.version = ver
+    this.wizard = wizard
     this.app = express()
     this.app.use(bodyParser.json())
     this.app.use(bodyParser.urlencoded({extended: true}))
@@ -19,8 +20,8 @@ class Server {
         console.log('Error connecting to ', db, err)
     })
 
-    router.get('/api/version', (req, res) => { this.handleVersion(req, res) })
     router.post('/api/bot/respond', (req, res) => { this.handlePost(req, res) })
+    router.get('/api/version', (req, res) => { this.handleVersion(req, res) })
 
     let port = process.env.PORT || 3000
     this.app.use('/', router)
@@ -33,6 +34,25 @@ class Server {
 
   handlePost(req, res) {
     const request = new Request(req)
+    if (request.isIncomingMessage()) {
+
+      let user = new User(request)
+      user.load()
+        .then(usr => {
+
+          // now to progress the wizard
+          this.wizard.load(usr)
+
+          res.json({ success: true, user: usr })
+        })
+        .catch(ex => {
+          res.sendStatusCode(500)
+            .send(ex)
+        })
+    }
+    else {
+      res.json({ success: true, ignored: true })
+    }
   }
 
   handleVersion(req, res) {

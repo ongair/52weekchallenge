@@ -1,9 +1,11 @@
 const EntryStep = require('./steps/entry')
 const OptinStep = require('./steps/optin')
+const botkit = require('ongair-botkit')
+const { Wizard } = botkit
 
 class SaverWizard extends Wizard {
-  constructor(user) {
-    super(user,
+  constructor() {
+    super(null,
       [
         new EntryStep(),
         new OptinStep()
@@ -12,4 +14,4 @@ class SaverWizard extends Wizard {
   }
 }
 
-module.exports = ProductWizard
+module.exports = SaverWizard
