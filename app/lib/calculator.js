@@ -17,7 +17,7 @@ class Calculator {
   }
 
   total() {
-    return this.balance(52)
+    return this.balance(53 - this.start)
   }
 
   static weekFromDate(date) {

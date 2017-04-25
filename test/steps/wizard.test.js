@@ -1,6 +1,7 @@
 const botkit = require('ongair-botkit')
 const { Message } = botkit
 const Begin = require('../../app/steps/begin')
+const Setup = require('../../app/steps/setup')
 const chai = require('chai')
 const { expect } = chai
 const Calculator = require('../../app/lib/calculator')
@@ -8,10 +9,10 @@ const Calculator = require('../../app/lib/calculator')
 describe('The wizard configuration steps', () => {
 
   let user = { accountType: 'MessengerV2', state: 'optin', name: 'Alex', contactId: '2' }
-  let step = new Begin()
+
 
   describe('The begin step', () => {
-
+    let step = new Begin()
     it('Can handle a correct amount', (done) => {
 
       step.onEnter(user, '50')
@@ -50,5 +51,36 @@ describe('The wizard configuration steps', () => {
         })
     })
 
+  })
+
+  describe('The Setup step', () => {
+
+    let step = new Setup()
+
+    user.get = (key) => {
+      if (key == 'amount')
+        return 50
+    }
+
+    it('Can handle a catch up option', (done) => {
+      step.onEnter(user, 'Start')
+        .then(response => {
+          let { key, messages, metadata } = response
+
+          let week = Calculator.weekFromDate(new Date())
+          let calc = new Calculator(50, week)
+          let total = calc.total()
+
+          let expected = [
+            new Message(user, "No worries. Just so you know the total amount you'll save this year will be " + total),
+            new Message(user, "How would you like to be making your payments?", ["Weekly", "Monthly"])
+          ]
+
+          expect(key).to.be.equal('frequency')
+          expect(metadata).to.be.eql([ { key: 'mode', value: 'start' } ])
+          expect(messages).to.be.eql(expected)
+          done()
+        })
+    })
   })
 })
