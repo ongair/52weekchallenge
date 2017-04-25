@@ -18,7 +18,7 @@ class OptIn extends YesNoStep {
         messages.push(new Message(user, "Great! Let me show you how."))
         messages.push(new Message(user, "First start with a small amount, like Ksh. 50. Then each week increase the amount you save by this same amount."))
         messages.push(new Message(user, "So you save 100 in week 2, 150 in week 3 and so on until 2,600 in the last week of the year."))
-        messages.push(new Message(user, "By then you will have saved Ksh. 68,900!", ["Huh?", "Let's do this"]))
+        messages.push(new Message(user, "By then you will have saved Ksh. 68,900!", ["Show me", "Let's go"]))
       }
       else {
         key = 'new'
