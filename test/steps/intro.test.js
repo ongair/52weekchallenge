@@ -21,4 +21,15 @@ describe('The intro step', () => {
       })
 
   })
+
+  it('Can ask to begin', (done) => {
+    step.onEnter(user, "Let's go")
+      .then(response => {
+        let { key, messages } = response
+
+        expect(key).to.be.equal('begin')
+        expect(messages).to.be.eql([ new Message(user, "Ok. How much you would like to start with?", ["50", "100"]) ])
+        done()
+      })
+  })
 })

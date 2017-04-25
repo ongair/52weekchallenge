@@ -21,6 +21,7 @@ class Server {
     })
 
     router.post('/api/bot/respond', (req, res) => { this.handlePost(req, res) })
+    router.post('/api/worker', (req, res) => { this.handleWorker(req, res) })
     router.get('/api/version', (req, res) => { this.handleVersion(req, res) })
 
     let port = process.env.PORT || 3000
@@ -53,6 +54,11 @@ class Server {
     else {
       res.json({ success: true, ignored: true })
     }
+  }
+
+  handleWorker(req, res) {
+    console.log('Calling worker')
+    res.json({ success: true })
   }
 
   handleVersion(req, res) {
