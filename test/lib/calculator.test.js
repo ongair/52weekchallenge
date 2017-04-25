@@ -53,4 +53,9 @@ describe('The calculator', () => {
     balance = calc.balance(52)
     expect(balance).to.be.equal(68900)
   })
+
+  it('Can get the total for a year', () => {
+    let calc = new Calculator(50)
+    expect(calc.total()).to.be.equal(68900)
+  })
 })

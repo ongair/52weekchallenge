@@ -16,6 +16,10 @@ class Calculator {
     return week * this.seed
   }
 
+  total() {
+    return this.balance(52)
+  }
+
   static weekFromDate(date) {
     let firstJanOfYear = new Date(date.getFullYear(),0,1)
     let millisecsInDay = 86400000
