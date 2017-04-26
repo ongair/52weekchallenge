@@ -3,6 +3,7 @@ const { Message } = botkit
 const Begin = require('../../app/steps/begin')
 const Setup = require('../../app/steps/setup')
 const Frequency = require('../../app/steps/frequency')
+const Reminder = require('../../app/steps/reminder')
 const chai = require('chai')
 const { expect } = chai
 const Calculator = require('../../app/lib/calculator')
@@ -112,6 +113,23 @@ describe('The wizard configuration steps', () => {
           expect(key).to.be.equal('reminder')
           expect(metadata).to.be.eql([ { key: 'interval', value: 'weekly' }])
           expect(messages).to.be.eql(expected)
+          done()
+        })
+    })
+  })
+
+  describe('The reminder step', () => {
+    let step = new Reminder()
+
+    it('Can set up a weekly reminder', (done) => {
+
+      step.onEnter(user, 'Yes')
+        .then(response => {
+
+          let { key, messages, metadata } = response
+
+          
+          expect(key).to.be.equal('complete')
           done()
         })
     })
