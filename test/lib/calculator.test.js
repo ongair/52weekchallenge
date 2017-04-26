@@ -63,4 +63,12 @@ describe('The calculator', () => {
     let calc = new Calculator(50, 17)
     expect(calc.total()).to.be.equal(33300)
   })
+
+  it('Can add days to a date', () => {
+    let date = new Date(2017, 4, 26)
+
+    let expected = new Date(2017, 5, 2)
+    let future = Calculator.addDays(date, 7)
+    expect(future).to.be.eql(expected)
+  })
 })

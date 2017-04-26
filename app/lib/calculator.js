@@ -26,6 +26,12 @@ class Calculator {
 
     return Math.ceil(((( date - firstJanOfYear ) / millisecsInDay ) + firstJanOfYear.getDay() + 1 ) / 7)
   }
+
+  static addDays(date, days) {
+    let result = new Date(date)
+    result.setDate(result.getDate() + days)
+    return result
+  }
 }
 
 module.exports = Calculator
