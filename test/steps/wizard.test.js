@@ -79,7 +79,7 @@ describe('The wizard configuration steps', () => {
           ]
 
           expect(key).to.be.equal('frequency')
-          expect(metadata).to.be.eql([ { key: 'mode', value: 'start' } ])
+          expect(metadata).to.be.eql([ { key: 'mode', value: 'start' }, { key: 'week', value: week } ])
           expect(messages).to.be.eql(expected)
           done()
         })

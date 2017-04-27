@@ -21,9 +21,14 @@ class Setup extends Step {
       let start = this.isStart(input)
       if (start) {
         key = 'frequency'
-        metadata = [{ key: 'mode', value: 'start' }]
-
         let week = Calculator.weekFromDate(new Date())
+
+        metadata = [
+          { key: 'mode', value: 'start' },
+          { key: 'week', value: week }
+        ]
+
+
         let amount = user.get('amount')
         let calc = new Calculator(amount, week)
         let total = calc.total()
