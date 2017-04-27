@@ -21,7 +21,7 @@ class Server {
     })
 
     router.post('/api/bot/respond', (req, res) => { this.handlePost(req, res) })
-    router.post('/api/worker', (req, res) => { this.handleWorker(req, res) })
+    router.get('/api/worker', (req, res) => { this.handleWorker(req, res) })
     router.get('/api/version', (req, res) => { this.handleVersion(req, res) })
 
     let port = process.env.PORT || 3000
