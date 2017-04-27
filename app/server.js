@@ -43,8 +43,10 @@ class Server {
 
           // now to progress the wizard
           this.wizard.load(usr)
-
-          res.json({ success: true, user: usr })
+          this.wizard.progress(request.text)
+            .then(result => {
+              res.json({ success: true, user: usr, query: request, responses: result.messages })
+            })
         })
         .catch(ex => {
           res.sendStatusCode(500)
