@@ -127,8 +127,17 @@ describe('The wizard configuration steps', () => {
         .then(response => {
 
           let { key, messages, metadata } = response
+          let next = Calculator.addDays(new Date(), 8)
+          let expected = [
+            new Message(user, "No worries. I'll remind you next week."),
+            new Message(user, "And remember, 'A bargain isn't a bargain unless it's something you need'")
+          ]
 
-          
+          expect(metadata).to.be.eql([
+            { key: 'reminder', value: 'weekly' },
+            { key: 'next', value: next }
+          ])
+          expect(messages).to.be.eql(expected)
           expect(key).to.be.equal('complete')
           done()
         })

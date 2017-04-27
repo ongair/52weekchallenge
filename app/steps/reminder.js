@@ -15,9 +15,15 @@ class Reminder extends YesNoStep {
 
       if (this.positive(input)) {
         let next = Calculator.addDays(new Date(), 8)
+
         metadata = [
           { key: 'reminder', value: 'weekly' },
           { key: 'next', value: next }
+        ]
+
+        messages = [
+          new Message(user, "No worries. I'll remind you next week."),
+          new Message(user, "And remember, 'A bargain isn't a bargain unless it's something you need'")
         ]
       }
       resolve({ key: key, metadata: metadata, messages: messages })
