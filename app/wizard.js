@@ -19,7 +19,8 @@ class SaverWizard extends Wizard {
         new Frequency(),
         new Intro(),
         new OptIn(),
-        new Reminder()
+        new Reminder(),
+        new Setup()
       ]
     )
   }
