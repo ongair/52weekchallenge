@@ -59,7 +59,7 @@ class Server {
   }
 
   handleWorker(req, res) {
-    console.log('Calling worker')
+    console.log('Calling worker', new Date())
     res.json({ success: true })
   }
 
