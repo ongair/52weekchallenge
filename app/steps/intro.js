@@ -2,7 +2,7 @@ const botkit = require('ongair-botkit')
 const { Step, Message } = botkit
 const fuzzy = require('fuzzy')
 
-class Demo extends Step {
+class Intro extends Step {
 
   constructor() {
     super('intro')
@@ -28,7 +28,7 @@ class Demo extends Step {
         key = 'demo'
       }
       else {
-        key = 'begin'        
+        key = 'begin'
       }
 
       resolve({ key: key, messages: messages })
@@ -36,4 +36,4 @@ class Demo extends Step {
   }
 }
 
-module.exports = Demo
+module.exports = Intro
