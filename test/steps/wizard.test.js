@@ -133,10 +133,10 @@ describe('The wizard configuration steps', () => {
             new Message(user, "And remember, 'A bargain isn't a bargain unless it's something you need'")
           ]
 
-          expect(metadata).to.be.eql([
-            { key: 'reminder', value: 'weekly' },
-            { key: 'next', value: next }
-          ])
+          let reminder = metadata[0]
+          expect(reminder['key']).to.equal('reminder')
+          expect(reminder['value']).to.equal('weekly')
+
           expect(messages).to.be.eql(expected)
           expect(key).to.be.equal('complete')
           done()
