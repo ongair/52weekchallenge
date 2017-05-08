@@ -2,6 +2,7 @@ const botkit = require('ongair-botkit')
 const { Message, Step } = botkit
 const nlp = require('compromise')
 const Calculator = require('../lib/calculator')
+const numeral = require('numeral')
 
 class Begin extends Step {
 
@@ -26,8 +27,8 @@ class Begin extends Step {
         let current = calc.balance(week)
 
         messages = [
-         new Message(user, "Great choice. You stand to save upto " + yearBalance + " by the end of the year!"),
-         new Message(user, "We're now " + progress + "% through the year, meaning you should have " + current + " already saved."),
+         new Message(user, "Great choice. You stand to save upto " + numeral(yearBalance).format('0,0.00') + " by the end of the year!"),
+         new Message(user, "We're now " + progress + "% through the year, meaning you should have " + numeral(current).format('0,0.00') + " already saved."),
          new Message(user, "Here's how I can help. If you have been saving elsewhere, you can transfer your progress here. Otherwise, you can start from this weeks installment."),
          new Message(user, "How would you like to progress?", ["Catch up", "Start"])
        ]

@@ -5,6 +5,7 @@ const Setup = require('../../app/steps/setup')
 const Frequency = require('../../app/steps/frequency')
 const Reminder = require('../../app/steps/reminder')
 const chai = require('chai')
+const numeral = require('numeral')
 const { expect } = chai
 const Calculator = require('../../app/lib/calculator')
 describe('The wizard configuration steps', () => {
@@ -26,8 +27,8 @@ describe('The wizard configuration steps', () => {
           let progress = Math.ceil(week / 52 * 100)
 
           let expected = [
-            new Message(user, "Great choice. You stand to save upto " + yearBalance + " by the end of the year!"),
-            new Message(user, "We're now " + progress + "% through the year, meaning you should have " + current + " already saved."),
+            new Message(user, "Great choice. You stand to save upto " + numeral(yearBalance).format('0,0.00') + " by the end of the year!"),
+            new Message(user, "We're now " + progress + "% through the year, meaning you should have " + numeral(current).format('0,0.00') + " already saved."),
             new Message(user, "Here's how I can help. If you have been saving elsewhere, you can transfer your progress here. Otherwise, you can start from this weeks installment."),
             new Message(user, "How would you like to progress?", ["Catch up", "Start"])
           ]
