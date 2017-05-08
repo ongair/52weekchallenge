@@ -74,7 +74,7 @@ describe('The wizard configuration steps', () => {
           let total = calc.total()
 
           let expected = [
-            new Message(user, "No worries. Just so you know the total amount you'll save this year will be " + total),
+            new Message(user, "No worries. Just so you know the total amount you'll save this year will be " + numeral(total).format('0,0.00')),
             new Message(user, "How would you like to be making your payments?", ["Weekly", "Monthly"])
           ]
 
@@ -104,9 +104,9 @@ describe('The wizard configuration steps', () => {
           let amount = 50
           let calc = new Calculator(amount)
           let installment = calc.installment(week)
-
+          
           let expected = [
-            new Message(user, "Cool. Your first installment due for this week is " + installment),
+            new Message(user, "Cool. Your first installment due for this week is " + numeral(installment).format('0,0.00')),
             new Message(user, "Would you like me to send you reminders every week?", ["Yes", "No"])
           ]
 

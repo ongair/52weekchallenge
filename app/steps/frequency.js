@@ -2,7 +2,7 @@ const fuzzy = require('fuzzy')
 const botkit = require('ongair-botkit')
 const Calculator = require('../lib/calculator')
 const { Message, Step } = botkit
-
+const numeral = require('numeral')
 
 class Frequency extends Step {
 
@@ -31,7 +31,7 @@ class Frequency extends Step {
       if (this.isWeekly(input)) {
         metadata = [{ key: 'interval', value: 'weekly'}]
         messages = [
-          new Message(user, "Cool. Your first installment due for this week is " + installment),
+          new Message(user, "Cool. Your first installment due for this week is " + numeral(installment).format('0,0.00')),
           new Message(user, "Would you like me to send you reminders every week?", ["Yes", "No"])
         ]
       }

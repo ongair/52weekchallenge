@@ -1,4 +1,5 @@
 const fuzzy = require('fuzzy')
+const numeral = require('numeral')
 const botkit = require('ongair-botkit')
 const Calculator = require('../lib/calculator')
 const { Message, Step } = botkit
@@ -34,7 +35,7 @@ class Setup extends Step {
         let total = calc.total()
 
         messages = [
-          new Message(user, "No worries. Just so you know the total amount you'll save this year will be " + total),
+          new Message(user, "No worries. Just so you know the total amount you'll save this year will be " + numeral(total).format('0,0.00')),
           new Message(user, "How would you like to be making your payments?", ["Weekly", "Monthly"])
         ]
       }
