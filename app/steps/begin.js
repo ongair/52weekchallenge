@@ -22,7 +22,7 @@ class Begin extends Step {
         let calc = new Calculator(amount)
         let yearBalance = calc.total()
         let week = Calculator.weekFromDate(new Date())
-        let progress = Math.ceil(week / 52)
+        let progress = Math.ceil(week / 52 * 100)
         let current = calc.balance(week)
 
         messages = [

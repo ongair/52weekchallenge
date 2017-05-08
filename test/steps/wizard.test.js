@@ -23,7 +23,7 @@ describe('The wizard configuration steps', () => {
           let yearBalance = calc.total()
           let week = Calculator.weekFromDate(new Date())
           let current = calc.balance(week)
-          let progress = Math.ceil(week / 52)
+          let progress = Math.ceil(week / 52 * 100)
 
           let expected = [
             new Message(user, "Great choice. You stand to save upto " + yearBalance + " by the end of the year!"),
