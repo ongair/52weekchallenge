@@ -2,6 +2,7 @@ const fuzzy = require('fuzzy')
 const Calculator = require('../lib/calculator')
 const botkit = require('ongair-botkit')
 const { Message, YesNoStep } = botkit
+const Plan = require('../lib/models/plan')
 
 class Reminder extends YesNoStep {
   constructor() {
@@ -27,6 +28,26 @@ class Reminder extends YesNoStep {
         ]
       }
       resolve({ key: key, metadata: metadata, messages: messages })
+    })
+  }
+
+  onExit(user, key) {
+    return new Promise((resolve, reject) => {
+      super.onExit(user, key)
+      if(key == 'complete') {
+        // we should save the plan
+        let week = user.get('week'),
+            amount = user.get('amount'),
+            mode = user.get('mode'),
+            interval = user.get('interval'),
+            id = user._id
+
+        let next = Calculator.addDays(new Date(), 8)
+
+        let plan = new Plan({ week: week, amount: amount, mode: mode, interval: interval, status: 'new', remind: true, reminderDate: next, contactId: user.contactId })
+        plan.save()
+        resolve({ plan: plan })
+      }
     })
   }
 }

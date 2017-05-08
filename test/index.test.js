@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'test'
-process.env.MONGODB_URI = 'mongodb://localhost/twinplusbottest'
+process.env.MONGODB_URI = 'mongodb://localhost/52weektest'
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');

@@ -7,7 +7,6 @@ const Reminder = require('../../app/steps/reminder')
 const chai = require('chai')
 const { expect } = chai
 const Calculator = require('../../app/lib/calculator')
-
 describe('The wizard configuration steps', () => {
 
   let user = { accountType: 'MessengerV2', state: 'optin', name: 'Alex', contactId: '2' }
@@ -139,6 +138,34 @@ describe('The wizard configuration steps', () => {
 
           expect(messages).to.be.eql(expected)
           expect(key).to.be.equal('complete')
+          done()
+        })
+    })
+
+    it('Can save a plan', (done) => {
+      user.get = (key) => {
+        if (key == 'reminder')
+          return 'weekly'
+        else if (key == 'mode')
+          return 'start'
+        else if (key == 'week')
+          return 19
+        else if (key == 'interval')
+          return 'weekly'
+        else if (key == 'amount')
+          return 50
+      }
+
+      step.onExit(user, 'complete')
+        .then(response => {
+          let { plan } = response
+
+          expect(plan.mode).to.be.equal('start')
+          expect(plan.week).to.be.equal(19)
+          expect(plan.interval).to.be.equal('weekly')
+          expect(plan.amount).to.be.equal(50)
+          expect(plan.status).to.be.equal('new')
+
           done()
         })
     })
